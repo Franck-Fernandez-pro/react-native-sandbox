@@ -1,20 +1,18 @@
 const COLORS = {
-  primary: "#312651",
-  secondary: "#444262",
-  tertiary: "#FF7754",
-
-  gray: "#83829A",
-  gray2: "#C1C0C8",
-
-  white: "#F3F4F8",
-  lightWhite: "#FAFAFC",
-};
+  primary: '#312651',
+  secondary: '#444262',
+  tertiary: '#FF7754',
+  gray: '#83829A',
+  gray2: '#C1C0C8',
+  white: '#F3F4F8',
+  lightWhite: '#FAFAFC',
+} as const;
 
 const FONT = {
-  regular: "DMRegular",
-  medium: "DMMedium",
-  bold: "DMBold",
-};
+  regular: 'DMRegular',
+  medium: 'DMMedium',
+  bold: 'DMBold',
+} as const;
 
 const SIZES = {
   xSmall: 10,
@@ -23,11 +21,11 @@ const SIZES = {
   large: 20,
   xLarge: 24,
   xxLarge: 32,
-};
+} as const;
 
 const SHADOWS = {
   small: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -37,7 +35,7 @@ const SHADOWS = {
     elevation: 2,
   },
   medium: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -46,6 +44,6 @@ const SHADOWS = {
     shadowRadius: 5.84,
     elevation: 5,
   },
-};
+} as const;
 
 export { COLORS, FONT, SIZES, SHADOWS };
