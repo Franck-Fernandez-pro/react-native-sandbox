@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "ES6",
+    "jsx": "preserve",
+    "checkJs": true
+  },
+  "extends": "expo/tsconfig.base",
+  "exclude": ["node_modules", "**/node_modules/*"]
+}
