@@ -5,16 +5,16 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
-} from "react-native";
-import { useRouter } from "expo-router";
-import { FONT, SIZES, COLORS } from "../../constants";
-import PopularJobCard from "../common/cards/PopularJobCard";
-import useFetch from "../../hooks/useFetch";
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { FONT, SIZES, COLORS } from '../../constants';
+import PopularJobCard from '../common/cards/PopularJobCard';
+import useFetch from '../../hooks/useFetch';
 
 export default function PopularJobs() {
   const router = useRouter();
-  const { data, isLoading, error } = useFetch("search", {
-    query: "React developer",
+  const { data, isLoading, error } = useFetch('search', {
+    query: 'React developer',
     num_pages: 1,
   });
 
@@ -35,8 +35,7 @@ export default function PopularJobs() {
         ) : (
           <FlatList
             data={data}
-            // keyExtractor={(item) => item?.job_id}
-            // keyExtractor={(item) => `${item}`}
+            keyExtractor={(item) => item?.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
             renderItem={({ item }) => (
@@ -58,9 +57,9 @@ const styles = StyleSheet.create({
     marginTop: SIZES.xLarge,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerTitle: {
     fontSize: SIZES.large,
