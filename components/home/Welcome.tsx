@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   View,
   Text,
@@ -7,17 +7,15 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
-  StyleProp,
-  ImageStyle,
-} from 'react-native';
-import { COLORS, FONT, SIZES, icons } from '../../constants';
-import { useRouter } from 'expo-router';
+} from "react-native";
+import { COLORS, FONT, SIZES, icons } from "../../constants";
+import { useRouter } from "expo-router";
 
-const JOB_TYPES = ['Full-time', 'Part-time', 'Contractor'];
+const JOB_TYPES = ["Full-time", "Part-time", "Contractor"];
 
 export default function Welcome({}: {}) {
   const router = useRouter();
-  const [activeJobType, setActiveJobType] = useState('');
+  const [activeJobType, setActiveJobType] = useState("");
 
   function handlePressJobType(jobType: string) {
     setActiveJobType(jobType);
@@ -35,7 +33,7 @@ export default function Welcome({}: {}) {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value={''}
+            value={""}
             onChange={() => {}}
             placeholder="What are you looking for?"
           />
@@ -45,7 +43,7 @@ export default function Welcome({}: {}) {
           <Image
             source={icons.search}
             resizeMode="contain"
-            style={styles.searchBtnImage as StyleProp<ImageStyle>}
+            style={styles.searchBtnImage}
           />
         </TouchableOpacity>
       </View>
@@ -58,10 +56,22 @@ export default function Welcome({}: {}) {
           horizontal
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={styles.tab(activeJobType, item)}
+              style={{
+                ...styles.tab,
+                borderColor:
+                  activeJobType === item ? COLORS.secondary : COLORS.gray2,
+              }}
               onPress={() => handlePressJobType(item)}
             >
-              <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
+              <Text
+                style={{
+                  ...styles.tabText,
+                  color:
+                    activeJobType === item ? COLORS.secondary : COLORS.gray2,
+                }}
+              >
+                {item}
+              </Text>
             </TouchableOpacity>
           )}
         />
@@ -72,7 +82,7 @@ export default function Welcome({}: {}) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
   userName: {
     fontFamily: FONT.regular,
@@ -86,9 +96,9 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   searchContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
     marginTop: SIZES.large,
     height: 50,
   },
@@ -96,43 +106,41 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     marginRight: SIZES.small,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: SIZES.medium,
-    height: '100%',
+    height: "100%",
   },
   searchInput: {
     fontFamily: FONT.regular,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     paddingHorizontal: SIZES.medium,
   },
   searchBtn: {
     width: 50,
-    height: '100%',
+    height: "100%",
     backgroundColor: COLORS.tertiary,
     borderRadius: SIZES.medium,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   searchBtnImage: {
-    width: '50%',
-    height: '50%',
+    width: "50%",
+    height: "50%",
     tintColor: COLORS.white,
   },
   tabsContainer: {
-    width: '100%',
+    width: "100%",
     marginTop: SIZES.medium,
   },
-  tab: (activeJobType: string, item: string) => ({
+  tab: {
     paddingVertical: SIZES.small / 2,
     paddingHorizontal: SIZES.small,
     borderRadius: SIZES.medium,
     borderWidth: 1,
-    borderColor: activeJobType === item ? COLORS.secondary : COLORS.gray2,
-  }),
-  tabText: (activeJobType: string, item: string) => ({
+  },
+  tabText: {
     fontFamily: FONT.medium,
-    color: activeJobType === item ? COLORS.secondary : COLORS.gray2,
-  }),
+  },
 });

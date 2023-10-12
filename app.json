@@ -6,6 +6,9 @@
     },
     "plugins": ["expo-router"],
     "name": "react-native-sandbox",
-    "slug": "react-native-sandbox"
+    "slug": "react-native-sandbox",
+    "ios": {
+      "bundleIdentifier": "0.1.0"
+    }
   }
 }

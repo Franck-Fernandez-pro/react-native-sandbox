@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   TouchableOpacity,
   Image,
@@ -7,9 +6,9 @@ import {
   ImageStyle,
   DimensionValue,
   GestureResponderEvent,
-} from 'react-native';
-import { StyleSheet } from 'react-native';
-import { COLORS, SIZES } from '../../../constants';
+} from "react-native";
+import { StyleSheet } from "react-native";
+import { COLORS, SIZES } from "../../../constants";
 
 const ScreenHeaderBtn = ({
   iconUrl,
@@ -38,8 +37,8 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: COLORS.white,
     borderRadius: SIZES.small / 1.25,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnImg: (dimension: DimensionValue): StyleProp<ImageStyle> => ({
     width: dimension,
