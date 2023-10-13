@@ -1,13 +1,6 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  GestureResponderEvent,
-} from 'react-native';
-import { COLORS, FONT, SHADOWS, SIZES } from '../../../constants';
-import { checkImageURL } from '../../../utils';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { COLORS, FONT, SHADOWS, SIZES } from "../../../constants";
+import { checkImageURL } from "../../../utils";
 
 export default function PopularJobCard({
   item,
@@ -16,27 +9,27 @@ export default function PopularJobCard({
 }: {
   item: Job;
   selectedJob: string;
-  handleCardPress: (e: GestureResponderEvent) => void;
+  handleCardPress: (item: Job) => void;
 }) {
   return (
     <TouchableOpacity
       style={{
         ...styles.container,
-        backgroundColor: selectedJob === item.job_id ? COLORS.primary : '#FFF',
+        backgroundColor: selectedJob === item.job_id ? COLORS.primary : "#FFF",
       }}
-      onPress={handleCardPress}
+      onPress={() => handleCardPress(item)}
     >
       <TouchableOpacity
         style={{
           ...styles.logoContainer,
-          backgroundColor: selectedJob === item.job_id ? '#FFF' : COLORS.white,
+          backgroundColor: selectedJob === item.job_id ? "#FFF" : COLORS.white,
         }}
       >
         <Image
           source={{
             uri: checkImageURL(item.employer_logo)
               ? item.employer_logo
-              : 'https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg',
+              : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
           }}
           resizeMode="contain"
           style={styles.logoImage}
@@ -68,7 +61,7 @@ const styles = StyleSheet.create({
     width: 250,
     padding: SIZES.xLarge,
     borderRadius: SIZES.medium,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     ...SHADOWS.medium,
     shadowColor: COLORS.white,
   },
@@ -76,17 +69,17 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: SIZES.medium,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   logoImage: {
-    width: '70%',
-    height: '70%',
+    width: "70%",
+    height: "70%",
   },
   companyName: {
     fontSize: SIZES.medium,
     fontFamily: FONT.regular,
-    color: '#B3AEC6',
+    color: "#B3AEC6",
     marginTop: SIZES.small / 1.5,
   },
   infoContainer: {
@@ -97,10 +90,10 @@ const styles = StyleSheet.create({
     fontFamily: FONT.medium,
   },
   infoWrapper: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 5,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
   publisher: {
     fontSize: SIZES.medium - 2,
@@ -110,6 +103,6 @@ const styles = StyleSheet.create({
   location: {
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.regular,
-    color: '#B3AEC6',
+    color: "#B3AEC6",
   },
 });

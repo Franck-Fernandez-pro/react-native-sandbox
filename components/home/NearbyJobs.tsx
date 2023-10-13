@@ -3,32 +3,29 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
   ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { FONT, SIZES, COLORS } from "../../constants";
-import PopularJobCard from "../common/cards/PopularJobCard";
 import useFetch from "../../hooks/useFetch";
-import { useState } from "react";
+import NearbyJobCard from "../common/cards/NearbyJobCard";
 
-export default function PopularJobs() {
+export default function NearbyJobs() {
   const router = useRouter();
-  const [selectedJob, setSelectedJob] = useState("");
   const { data, isLoading, error } = useFetch("search", {
     query: "React developer",
     num_pages: 1,
   });
+  const jobs = data as Job[];
 
-  const handleCardPress = (item: Job) => {
-    router.push(`/job-details/${item.job_id}`);
-    setSelectedJob(item.job_id);
-  };
+  function handleNavigate(id: string) {
+    router.push(`/job-details/${id}`);
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Popular jobs</Text>
+        <Text style={styles.headerTitle}>Nearby jobs</Text>
         <TouchableOpacity>
           <Text style={styles.headerBtn}>Show all</Text>
         </TouchableOpacity>
@@ -40,19 +37,13 @@ export default function PopularJobs() {
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item?.job_id}
-            contentContainerStyle={{ columnGap: SIZES.medium }}
-            horizontal
-            renderItem={({ item }) => (
-              <PopularJobCard
-                item={item}
-                selectedJob={selectedJob}
-                handleCardPress={handleCardPress}
-              />
-            )}
-          />
+          jobs?.map((job) => (
+            <NearbyJobCard
+              job={job}
+              key={`NearbyJobCard-${job.job_id}`}
+              handleNavigate={() => handleNavigate(job.job_id)}
+            />
+          ))
         )}
       </View>
     </View>
@@ -67,6 +58,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: SIZES.small,
   },
   headerTitle: {
     fontSize: SIZES.large,
@@ -80,5 +72,6 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     marginTop: SIZES.medium,
+    gap: SIZES.small,
   },
 });

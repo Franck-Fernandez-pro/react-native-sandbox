@@ -1,8 +1,9 @@
-import { View, ScrollView, Text, SafeAreaView } from "react-native";
-import { Stack, useRouter } from "expo-router";
-import { COLORS, SIZES, icons, images } from "../constants";
-import { Nearbyjobs, ScreenHeaderBtn, Welcome } from "../components";
-import PopularJobs from "../components/home/PopularJobs";
+import { View, ScrollView, SafeAreaView } from 'react-native';
+import { Stack, useRouter } from 'expo-router';
+import { COLORS, SIZES, icons, images } from '../constants';
+import { ScreenHeaderBtn, Welcome } from '../components';
+import PopularJobs from '../components/home/PopularJobs';
+import NearbyJobs from '../components/home/NearbyJobs';
 
 const Home = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const Home = () => {
         <View style={{ flex: 1, padding: SIZES.medium }}>
           <Welcome />
           <PopularJobs />
-          {/* <Nearbyjobs /> */}
+          <NearbyJobs />
         </View>
       </ScrollView>
     </SafeAreaView>
