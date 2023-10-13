@@ -3,7 +3,7 @@ export const checkImageURL = (url) => {
   else {
     const pattern = new RegExp(
       "^https?:\\/\\/.+\\.(png|jpg|jpeg|bmp|gif|webp)$",
-      "i",
+      "i"
     );
     return pattern.test(url);
   }
