@@ -10,11 +10,11 @@ import { COLORS, SIZES } from "../../../constants";
 const ScreenHeaderBtn = ({
   iconUrl,
   dimension,
-  onPress,
+  onPress = () => {},
 }: {
   iconUrl: ImageSourcePropType;
   dimension: DimensionValue;
-  onPress: () => void;
+  onPress?: () => void;
 }) => {
   return (
     <TouchableOpacity style={styles.btnContainer} onPress={onPress}>

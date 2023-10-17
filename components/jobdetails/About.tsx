@@ -1,6 +1,16 @@
-import { StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { COLORS, FONT, SIZES } from "../../constants";
 
-import { COLORS, FONT, SIZES } from "../../../constants";
+const About = ({ info }: { info: string }) => (
+  <View style={styles.container}>
+    <Text style={styles.headText}>About</Text>
+
+    <View style={styles.contentBox}>
+      <Text style={styles.contextText}>{info}</Text>
+    </View>
+  </View>
+);
+export default About;
 
 const styles = StyleSheet.create({
   container: {
@@ -24,5 +34,3 @@ const styles = StyleSheet.create({
     marginVertical: SIZES.small / 1.25,
   },
 });
-
-export default styles;

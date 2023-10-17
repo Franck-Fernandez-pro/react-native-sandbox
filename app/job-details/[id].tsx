@@ -1,5 +1,5 @@
 import { Stack, useRouter, useLocalSearchParams } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,10 @@ import { COLORS, icons, SIZES } from "../../constants";
 import ScreenHeaderBtn from "../../components/common/header/ScreenHeaderBtn";
 import useFetch from "../../hooks/useFetch";
 import Company from "../../components/jobdetails/Company";
-import Tabs from "../../components/jobdetails/tabs/Tabs";
+import Tabs from "../../components/jobdetails/Tabs";
+import Specifics from "../../components/jobdetails/Specifics";
+import About from "../../components/jobdetails/About";
+import Footer from "../../components/jobdetails/Footer";
 
 const tabs = ["About", "Qualifications", "Responsibilities"];
 
@@ -21,8 +24,31 @@ export default function JobDetails() {
   const { id } = useLocalSearchParams();
   const { data, isLoading, error } = useFetch("job-details", { job_id: id });
   const [refreshing, setRefreshing] = useState(false);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   function onRefresh() {}
+  function displayTabContent() {
+    switch (activeTab) {
+      case "About":
+        return <About info={data[0].job_description ?? "No data provided"} />;
+      case "Qualifications":
+        return (
+          <Specifics
+            title="Qualifications"
+            points={data[0].job_highlights?.Qualifications ?? ["N/A"]}
+          />
+        );
+      case "Responsibilities":
+        return (
+          <Specifics
+            title="Responsibilities"
+            points={data[0].job_highlights?.Responsibilities ?? ["N/A"]}
+          />
+        );
+      default:
+        return <></>;
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -38,9 +64,9 @@ export default function JobDetails() {
               onPress={() => router.back()}
             />
           ),
-          // headerRight: () => (
-          //   <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />
-          // ),
+          headerRight: () => (
+            <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />
+          ),
           headerTitle: "",
         }}
       />
@@ -66,13 +92,24 @@ export default function JobDetails() {
                 companyName={data[0].employer_name}
                 location={data[0].job_country}
               />
-              <Tabs />
+              <Tabs
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />
+              
+              {displayTabContent()}
             </View>
           )}
         </ScrollView>
-      </>
 
-      <Text>{id}</Text>
+        <Footer
+          url={
+            data[0]?.job_google_link ??
+            "https://careers.google.com/jobs/results"
+          }
+        />
+      </>
     </SafeAreaView>
   );
 }
