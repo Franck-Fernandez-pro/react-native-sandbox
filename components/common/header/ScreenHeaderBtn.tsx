@@ -1,11 +1,8 @@
 import {
   TouchableOpacity,
   Image,
-  StyleProp,
   ImageSourcePropType,
-  ImageStyle,
   DimensionValue,
-  GestureResponderEvent,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { COLORS, SIZES } from "../../../constants";
@@ -16,15 +13,19 @@ const ScreenHeaderBtn = ({
   onPress,
 }: {
   iconUrl: ImageSourcePropType;
-  dimension: string;
-  onPress: (event: GestureResponderEvent) => void;
+  dimension: DimensionValue;
+  onPress: () => void;
 }) => {
   return (
     <TouchableOpacity style={styles.btnContainer} onPress={onPress}>
       <Image
         source={iconUrl}
         resizeMode="cover"
-        style={styles.btnImg(dimension)}
+        style={{
+          width: dimension,
+          height: dimension,
+          borderRadius: SIZES.small / 1.25,
+        }}
       />
     </TouchableOpacity>
   );
@@ -40,9 +41,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  btnImg: (dimension: DimensionValue): StyleProp<ImageStyle> => ({
-    width: dimension,
-    height: dimension,
-    borderRadius: SIZES.small / 1.25,
-  }),
 });
