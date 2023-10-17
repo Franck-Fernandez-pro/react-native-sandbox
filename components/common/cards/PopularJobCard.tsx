@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-import { COLORS, FONT, SHADOWS, SIZES } from "../../../constants";
+import { COLORS, FONT, SHADOWS, SIZES, icons } from "../../../constants";
 import { checkImageURL } from "../../../utils";
 
 export default function PopularJobCard({
@@ -29,7 +29,7 @@ export default function PopularJobCard({
           source={{
             uri: checkImageURL(item.employer_logo)
               ? item.employer_logo
-              : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
+              : icons.FALLBACK,
           }}
           resizeMode="contain"
           style={styles.logoImage}

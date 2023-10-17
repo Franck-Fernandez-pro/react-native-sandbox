@@ -1,11 +1,12 @@
 import { View, ScrollView, SafeAreaView } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { COLORS, SIZES, icons, images } from "../constants";
-import { ScreenHeaderBtn, Welcome } from "../components";
 import PopularJobs from "../components/home/PopularJobs";
 import NearbyJobs from "../components/home/NearbyJobs";
+import ScreenHeaderBtn from "../components/common/header/ScreenHeaderBtn";
+import Welcome from "../components/home/Welcome";
 
-const Home = () => {
+export default function Home() {
   const router = useRouter();
 
   return (
@@ -39,6 +40,4 @@ const Home = () => {
       </ScrollView>
     </SafeAreaView>
   );
-};
-
-export default Home;
+}

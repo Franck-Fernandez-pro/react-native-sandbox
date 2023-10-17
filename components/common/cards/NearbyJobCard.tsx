@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-import { COLORS, SHADOWS, SIZES } from "../../../constants";
+import { COLORS, SHADOWS, SIZES, icons } from "../../../constants";
 import { checkImageURL } from "../../../utils";
 
 export default function NearbyJobCard({
@@ -16,7 +16,7 @@ export default function NearbyJobCard({
           source={{
             uri: checkImageURL(job.employer_logo)
               ? job.employer_logo
-              : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
+              : icons.FALLBACK,
           }}
           resizeMode="contain"
           style={styles.logoImage}
