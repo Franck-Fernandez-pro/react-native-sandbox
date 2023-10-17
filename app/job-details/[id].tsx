@@ -22,11 +22,18 @@ const tabs = ["About", "Qualifications", "Responsibilities"];
 export default function JobDetails() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const { data, isLoading, error } = useFetch("job-details", { job_id: id });
+  const { data, isLoading, error, refetch } = useFetch("job-details", {
+    job_id: id,
+  });
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  function onRefresh() {}
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
+
   function displayTabContent() {
     switch (activeTab) {
       case "About":
@@ -97,7 +104,7 @@ export default function JobDetails() {
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
               />
-              
+
               {displayTabContent()}
             </View>
           )}
