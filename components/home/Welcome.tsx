@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,15 @@ import { useRouter } from "expo-router";
 
 const JOB_TYPES = ["Full-time", "Part-time", "Contractor"];
 
-export default function Welcome({}: {}) {
+export default function Welcome({
+  search,
+  setSearch,
+  onPress,
+}: {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+  onPress;
+}) {
   const router = useRouter();
   const [activeJobType, setActiveJobType] = useState("");
 
@@ -33,13 +41,13 @@ export default function Welcome({}: {}) {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value={""}
-            onChange={() => {}}
+            value={search}
+            onChangeText={(text) => setSearch(text)}
             placeholder="What are you looking for?"
           />
         </View>
 
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+        <TouchableOpacity style={styles.searchBtn} onPress={onPress}>
           <Image
             source={icons.search}
             resizeMode="contain"
